@@ -1,0 +1,2317 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNP Table with Charts</title>
+<style>
+table {width: 100%; border-collapse: collapse;}
+th, td {border: 1px solid black; padding: 8px; text-align: left;}
+th {background-color: #c8d4dc;}
+.snp{ background-color: #dae9f8;}
+.pred{ background-color: #fbe2d5;}
+.rotate{writing-mode: vertical-lr; white-space: nowrap;}
+
+
+                .popup {
+                    display: none;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 400px;
+                    max-width: 90%; 
+                    padding: 20px;
+                    background-color: white;
+                    border: 1px solid #333;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    z-index: 1000;
+                }
+                .popup h2 {
+                    margin-top: 0;
+                }
+                .overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 999;
+                }
+                .close-btn {
+                    cursor: pointer;
+                    color: #333;
+                    text-align: right;
+                    font-weight: bold;
+                }
+                
+                .sequence-container {
+                    overflow-x: auto; 
+                    white-space: nowrap; 
+                    border-top: 1px solid #ddd;
+                    padding-top: 10px;
+                    margin-top: 10px;
+                    font-family: monospace; 
+                    height: 100px;
+                }
+                .copy-btn {
+                    display: inline-block;
+                    margin-top: 10px;
+                    padding: 6px 12px;
+                    background-color: #4CAF50;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+                .copy-btn:hover {
+                    background-color: #45a049;
+                }
+
+                .rotate {
+                writing-mode: vertical-rl;
+                transform: rotate(180deg); 
+                transform-origin: center;
+                white-space: nowrap;
+                }
+
+
+                
+</style>
+</head>
+<body>
+<h2>SNP Table with Bar Charts</h2>
+<table>
+<tr>
+<th>ID</th>
+<th>Bar charts</th>
+<th colspan="3">SNP information</th>
+<th colspan="5">Prediction information</th><th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-001_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-002_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-003_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-004_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-005_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-006_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-007_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-008_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-009_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-010_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-011_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-012_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-013_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-014_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-015_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-016_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-017_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-018_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-019_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-020_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-021_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-022_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-023_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-BLOOD_C-024_D-0</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-A7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-B7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-C7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-D7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-E7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-F7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-G7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-H7_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-A8_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-B8_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-C8_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-D8_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-F8_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-G8_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-A9_D-1</div></th>
+<th ><div class="rotate">P-11_O-Ec_S-STOOL_C-B9_D-1</div></th>
+</tr>
+<tr>
+<td rowspan="6"> 1</td><td rowspan="6"><a href="bar_charts/p_324016_bar_chart.png"><img src="bar_charts/p_324016_bar_chart.png" alt="Chart 1" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 324016</font></b></td>
+            <td>1</td>
+            <td>324016</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>338.0</td>
+            <td>113.0</td>
+            <td>R113L / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Inner membrane protein YebZ</td>
+            <td>.</td>
+            <td>EEMMPGIA_00314</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.478261</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 2</td><td rowspan="6"><a href="bar_charts/p_480971_bar_chart.png"><img src="bar_charts/p_480971_bar_chart.png" alt="Chart 2" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 480971</font></b></td>
+            <td>1</td>
+            <td>480971</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999845</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / P</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.333333</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 3</td><td rowspan="6"><a href="bar_charts/p_1104514_bar_chart.png"><img src="bar_charts/p_1104514_bar_chart.png" alt="Chart 3" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 1104514</font></b></td>
+            <td>1</td>
+            <td>1104514</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999944</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / P</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.179487</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 4</td><td rowspan="6"><a href="bar_charts/p_1759029_bar_chart.png"><img src="bar_charts/p_1759029_bar_chart.png" alt="Chart 4" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 1759029</font></b></td>
+            <td>1</td>
+            <td>1759029</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>977.0</td>
+            <td>326.0</td>
+            <td>E326G / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>hypothetical protein</td>
+            <td>.</td>
+            <td>EEMMPGIA_01712</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.5</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 5</td><td rowspan="6"><a href="bar_charts/p_2551778_bar_chart.png"><img src="bar_charts/p_2551778_bar_chart.png" alt="Chart 5" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 2551778</font></b></td>
+            <td>1</td>
+            <td>2551778</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.99999774</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / P</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.615385</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 6</td><td rowspan="6"><a href="bar_charts/p_3011617_bar_chart.png"><img src="bar_charts/p_3011617_bar_chart.png" alt="Chart 6" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3011617</font></b></td>
+            <td>1</td>
+            <td>3011617</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999989</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / P</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.227273</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 7</td><td rowspan="6"><a href="bar_charts/p_3078879_bar_chart.png"><img src="bar_charts/p_3078879_bar_chart.png" alt="Chart 7" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3078879</font></b></td>
+            <td>1</td>
+            <td>3078879</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999938</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>306.0</td>
+            <td>102.0</td>
+            <td>. / S</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>putative 2-dehydro-3-deoxygalactonokinase DgoK1</td>
+            <td>.</td>
+            <td>EEMMPGIA_02999</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.368421</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 8</td><td rowspan="6"><a href="bar_charts/p_3105226_bar_chart.png"><img src="bar_charts/p_3105226_bar_chart.png" alt="Chart 8" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3105226</font></b></td>
+            <td>1</td>
+            <td>3105226</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999937</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>1447.0</td>
+            <td>483.0</td>
+            <td>R483C / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Adenine deaminase</td>
+            <td>.</td>
+            <td>EEMMPGIA_03025</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.25641</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 9</td><td rowspan="6"><a href="bar_charts/p_3110222_bar_chart.png"><img src="bar_charts/p_3110222_bar_chart.png" alt="Chart 9" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3110222</font></b></td>
+            <td>1</td>
+            <td>3110222</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.99999964</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>200.0</td>
+            <td>67.0</td>
+            <td>K67T / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>hypothetical protein</td>
+            <td>.</td>
+            <td>EEMMPGIA_03029</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.5</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 10</td><td rowspan="6"><a href="bar_charts/p_3175184_bar_chart.png"><img src="bar_charts/p_3175184_bar_chart.png" alt="Chart 10" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3175184</font></b></td>
+            <td>1</td>
+            <td>3175184</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999634</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>206.0</td>
+            <td>69.0</td>
+            <td>S69N / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Autotransporter adhesin EhaG</td>
+            <td>.</td>
+            <td>EEMMPGIA_03090</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.358974</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 11</td><td rowspan="6"><a href="bar_charts/p_3288970_bar_chart.png"><img src="bar_charts/p_3288970_bar_chart.png" alt="Chart 11" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3288970</font></b></td>
+            <td>1</td>
+            <td>3288970</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999958</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>401.0</td>
+            <td>134.0</td>
+            <td>S134I / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Transcriptional regulator GadE</td>
+            <td>.</td>
+            <td>EEMMPGIA_03184</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.272727</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 12</td><td rowspan="6"><a href="bar_charts/p_3410970_bar_chart.png"><img src="bar_charts/p_3410970_bar_chart.png" alt="Chart 12" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3410970</font></b></td>
+            <td>1</td>
+            <td>3410970</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>64.0</td>
+            <td>22.0</td>
+            <td>R22G / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Transcriptional regulatory protein OmpR</td>
+            <td>.</td>
+            <td>EEMMPGIA_03293</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.352941</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 13</td><td rowspan="6"><a href="bar_charts/p_3925831_bar_chart.png"><img src="bar_charts/p_3925831_bar_chart.png" alt="Chart 13" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 3925831</font></b></td>
+            <td>1</td>
+            <td>3925831</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / P</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.558824</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 14</td><td rowspan="6"><a href="bar_charts/p_4227210_bar_chart.png"><img src="bar_charts/p_4227210_bar_chart.png" alt="Chart 14" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 4227210</font></b></td>
+            <td>1</td>
+            <td>4227210</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999038</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>1562.0</td>
+            <td>521.0</td>
+            <td>A521V / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Peptidyl-lysine N-acetyltransferase PatZ</td>
+            <td>.</td>
+            <td>EEMMPGIA_04144</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.461538</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 15</td><td rowspan="6"><a href="bar_charts/p_4621072_bar_chart.png"><img src="bar_charts/p_4621072_bar_chart.png" alt="Chart 15" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 4621072</font></b></td>
+            <td>1</td>
+            <td>4621072</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>1025.0</td>
+            <td>342.0</td>
+            <td>P342L / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Outer membrane porin C</td>
+            <td>.</td>
+            <td>EEMMPGIA_04498</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.441176</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 16</td><td rowspan="6"><a href="bar_charts/p_4995188_bar_chart.png"><img src="bar_charts/p_4995188_bar_chart.png" alt="Chart 16" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 4995188</font></b></td>
+            <td>4</td>
+            <td>48668</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.9999999</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>465.0</td>
+            <td>155.0</td>
+            <td>L155F / N</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>Lipopolysaccharide core heptose(II)-phosphate phosphatase</td>
+            <td>.</td>
+            <td>EEMMPGIA_04902</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.684211</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 17</td><td rowspan="6"><a href="bar_charts/p_4997916_bar_chart.png"><img src="bar_charts/p_4997916_bar_chart.png" alt="Chart 17" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 4997916</font></b></td>
+            <td>4</td>
+            <td>51396</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / P</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.870968</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 18</td><td rowspan="6"><a href="bar_charts/p_4997917_bar_chart.png"><img src="bar_charts/p_4997917_bar_chart.png" alt="Chart 18" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+<td rowspan="6"><b><font color="ff7f0e">T</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 4997917</font></b></td>
+            <td>4</td>
+            <td>51397</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / P</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.863636</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 19</td><td rowspan="6"><a href="bar_charts/p_4999617_bar_chart.png"><img src="bar_charts/p_4999617_bar_chart.png" alt="Chart 19" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#2ca02c">C</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 4999617</font></b></td>
+            <td>4</td>
+            <td>53097</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1.3272109e-14</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / I</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.972222</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            <tr>
+<td rowspan="6"> 20</td><td rowspan="6"><a href="bar_charts/p_5029537_bar_chart.png"><img src="bar_charts/p_5029537_bar_chart.png" alt="Chart 20" width="300" height="auto"></a></td>
+
+            <th class="snp">genome_pos</th>
+            <th class="snp">contig_idx</th>
+            <th class="snp">contig_pos</th>
+            <th class="pred">Pred_Label</th>
+            <th class="pred">CNN_pred</th>
+            <th class="pred">CNN_prob</th>
+            <th class="pred">Qual_filter (<30)</th>
+            <th class="pred">Cov_filter (<5)</th>
+            
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#1f77b4">A</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#808080">N</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+<td rowspan="6"><b><font color="#d62728">G</font></b></td>
+</tr>
+
+            <tr>
+            <td><b><font color="#9900FF"> 5029537</font></b></td>
+            <td>4</td>
+            <td>83017</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1.0</td>
+            <td>0</td>
+            <td>0</td>
+            </tr>
+            <tr>
+            <th class="snp">nt_pos</th>
+            <th class="snp">aa_pos</th>
+            <th class="snp">muts / type</th>
+            <th class="pred">MAF_filter (>0.85)</th>
+            <th class="pred">Indel_filter (<0.33)</th>
+            <th class="pred">MFAS_filter (1)</th>
+            <th class="pred">MMCP_filter (5)</th>
+            <th class="pred">CPN_filter (4,7)</th>
+        </tr>
+        <tr>
+ 
+            <td>nan</td>
+            <td>nan</td>
+            <td>. / I</td>
+            <td>0</td>
+            <td>1</td>
+            <td>-1</td>
+            <td>-1</td>
+            <td>-1</td>
+        </tr>
+        <tr>            
+            <th class="snp">product</th>
+            <th class="snp">protein_id</th>
+            <th class="snp">locustag</th>
+            <th class="pred">Fix_filter</th>
+            <th class="pred">Whether_recomb</th>
+            <th class="pred">Freq_ambigious</th>
+            <th class="pred">Gap_filter</th>
+            <th class="pred">WD_pred</th>
+        </tr>
+        <tr>
+            
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>-1</td>
+            <td>0</td>
+            <td>0.882353</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr><th rowspan="2" colspan="100%"></th><tr>
+            </table>
+
+
+            <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+
+            <div class="popup" id="popup">
+                <div class="close-btn" onclick="closePopup()">x</div>
+                <h2>Protein ID: <span id="popup-protein-id"></span></h2>
+                <div class="sequence-container" id="sequence-container">
+                    Sequence: <span id="popup-sequence"></span>
+                </div>
+                <button class="copy-btn" onclick="copySequence()">Copy</button>
+            </div>
+
+            <script>
+                function showPopup(proteinId, sequence) {
+
+                    document.getElementById("popup-protein-id").innerText = proteinId;
+                    document.getElementById("popup-sequence").innerText = sequence;
+
+
+                    document.getElementById("popup").style.display = "block";
+                    document.getElementById("overlay").style.display = "block";
+                }
+
+                function closePopup() {
+
+                    document.getElementById("popup").style.display = "none";
+                    document.getElementById("overlay").style.display = "none";
+                }
+
+                function copySequence() {
+
+                    const sequenceText = document.getElementById("popup-sequence").innerText;
+
+
+                    navigator.clipboard.writeText(sequenceText).then(() => {
+                        alert("Sequence copied to clipboard!");
+                    }).catch(err => {
+                        console.error("Could not copy text: ", err);
+                    });
+                }
+            </script>
+        
+</body>
+</html>
